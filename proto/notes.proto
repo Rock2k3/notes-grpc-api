@@ -19,6 +19,6 @@ message GetNoteResponse {
   Note note = 1;
 }
 
-service UserService {
+service NotesService {
   rpc GetNote(GetNoteRequest) returns (GetNoteResponse);
 }

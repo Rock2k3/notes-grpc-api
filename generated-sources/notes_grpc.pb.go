@@ -18,86 +18,86 @@ import (
 // Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
-// UserServiceClient is the client API for UserService service.
+// NotesServiceClient is the client API for NotesService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type UserServiceClient interface {
+type NotesServiceClient interface {
 	GetNote(ctx context.Context, in *GetNoteRequest, opts ...grpc.CallOption) (*GetNoteResponse, error)
 }
 
-type userServiceClient struct {
+type notesServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewUserServiceClient(cc grpc.ClientConnInterface) UserServiceClient {
-	return &userServiceClient{cc}
+func NewNotesServiceClient(cc grpc.ClientConnInterface) NotesServiceClient {
+	return &notesServiceClient{cc}
 }
 
-func (c *userServiceClient) GetNote(ctx context.Context, in *GetNoteRequest, opts ...grpc.CallOption) (*GetNoteResponse, error) {
+func (c *notesServiceClient) GetNote(ctx context.Context, in *GetNoteRequest, opts ...grpc.CallOption) (*GetNoteResponse, error) {
 	out := new(GetNoteResponse)
-	err := c.cc.Invoke(ctx, "/notes.UserService/GetNote", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/notes.NotesService/GetNote", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// UserServiceServer is the server API for UserService service.
-// All implementations must embed UnimplementedUserServiceServer
+// NotesServiceServer is the server API for NotesService service.
+// All implementations must embed UnimplementedNotesServiceServer
 // for forward compatibility
-type UserServiceServer interface {
+type NotesServiceServer interface {
 	GetNote(context.Context, *GetNoteRequest) (*GetNoteResponse, error)
-	mustEmbedUnimplementedUserServiceServer()
+	mustEmbedUnimplementedNotesServiceServer()
 }
 
-// UnimplementedUserServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedUserServiceServer struct {
+// UnimplementedNotesServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedNotesServiceServer struct {
 }
 
-func (UnimplementedUserServiceServer) GetNote(context.Context, *GetNoteRequest) (*GetNoteResponse, error) {
+func (UnimplementedNotesServiceServer) GetNote(context.Context, *GetNoteRequest) (*GetNoteResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetNote not implemented")
 }
-func (UnimplementedUserServiceServer) mustEmbedUnimplementedUserServiceServer() {}
+func (UnimplementedNotesServiceServer) mustEmbedUnimplementedNotesServiceServer() {}
 
-// UnsafeUserServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to UserServiceServer will
+// UnsafeNotesServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to NotesServiceServer will
 // result in compilation errors.
-type UnsafeUserServiceServer interface {
-	mustEmbedUnimplementedUserServiceServer()
+type UnsafeNotesServiceServer interface {
+	mustEmbedUnimplementedNotesServiceServer()
 }
 
-func RegisterUserServiceServer(s grpc.ServiceRegistrar, srv UserServiceServer) {
-	s.RegisterService(&UserService_ServiceDesc, srv)
+func RegisterNotesServiceServer(s grpc.ServiceRegistrar, srv NotesServiceServer) {
+	s.RegisterService(&NotesService_ServiceDesc, srv)
 }
 
-func _UserService_GetNote_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _NotesService_GetNote_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetNoteRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServiceServer).GetNote(ctx, in)
+		return srv.(NotesServiceServer).GetNote(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/notes.UserService/GetNote",
+		FullMethod: "/notes.NotesService/GetNote",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).GetNote(ctx, req.(*GetNoteRequest))
+		return srv.(NotesServiceServer).GetNote(ctx, req.(*GetNoteRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// UserService_ServiceDesc is the grpc.ServiceDesc for UserService service.
+// NotesService_ServiceDesc is the grpc.ServiceDesc for NotesService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var UserService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "notes.UserService",
-	HandlerType: (*UserServiceServer)(nil),
+var NotesService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "notes.NotesService",
+	HandlerType: (*NotesServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "GetNote",
-			Handler:    _UserService_GetNote_Handler,
+			Handler:    _NotesService_GetNote_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
