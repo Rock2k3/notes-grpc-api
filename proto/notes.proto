@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package notes;
+
+option go_package = "./generated-sources;NotesGrpcApi";
+
+message Note {
+  string noteId = 1;
+  string title=2;
+  string text=3;
+}
+
+message GetNoteRequest {
+  string userId = 1;
+  string noteId = 2;
+}
+
+message GetNoteResponse {
+  Note note = 1;
+}
+
+service UserService {
+  rpc GetNote(GetNoteRequest) returns (GetNoteResponse);
+}
