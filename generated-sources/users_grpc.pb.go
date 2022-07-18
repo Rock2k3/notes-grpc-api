@@ -4,7 +4,7 @@
 // - protoc             v3.21.2
 // source: proto/users.proto
 
-package NotesGrpcApi
+package notes_grpc_api
 
 import (
 	context "context"

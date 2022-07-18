@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package users;
 
-option go_package = "./generated-sources;NotesGrpcApi";
+option go_package = "./generated-sources;notes_grpc_api";
 
 message User {
   string userId = 1;
