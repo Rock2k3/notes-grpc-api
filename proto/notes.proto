@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package notes;
 
-option go_package = "./generated-sources;notes_grpc_api";
+option go_package = "./generated-sources;notesgrpcapi";
 
 message Note {
   string noteId = 1;
