@@ -1,4 +1,4 @@
-module github.com/Rock2k3/notes-grpc-api
+module github.com/Rock2k3/notes-grpc-api/v2
 
 go 1.18
 

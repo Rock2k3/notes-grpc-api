@@ -5,12 +5,16 @@ package users;
 option go_package = "./generated-sources;notesgrpcapi";
 
 message User {
-  string userId = 1;
-  string name=2;
+  string userUUID = 1;
+  string name = 2;
 }
 
-message GetUserRequest {
-  string userId = 1;
+message GetUserByUUIDRequest {
+  string userUUID = 1;
+}
+
+message GetUserByNameRequest {
+  string name = 1;
 }
 
 message GetUserResponse {
@@ -26,6 +30,7 @@ message AddUserResponse {
 }
 
 service UserService {
-  rpc GetUser(GetUserRequest) returns (GetUserResponse);
+  rpc GetUserByUUID(GetUserByUUIDRequest) returns (GetUserResponse);
+  rpc GetUserByName(GetUserByNameRequest) returns (GetUserResponse);
   rpc AddUser(AddUserRequest) returns (AddUserResponse);
 }
